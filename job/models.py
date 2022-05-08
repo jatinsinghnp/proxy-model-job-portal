@@ -1,6 +1,5 @@
 from django.db import models
-from company.models import Company
-
+from account.models import CompanyProfile
 # Create your models here.
 
 
@@ -24,7 +23,7 @@ class Job(models.Model):
     job_type = models.CharField(max_length=220, choices=TYPES_CHOICES)
     job_working_hour = models.CharField(max_length=20)
     job_expreience = models.CharField(max_length=220, blank=False, null=False)
-    job_company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    job_company = models.ForeignKey(CompanyProfile, on_delete=models.CASCADE)
     job_status = models.CharField(max_length=220, choices=STATUS_CHOICE)
     job_creations_date = models.DateTimeField(auto_now_add=True)
     def __str__(self) -> str:
