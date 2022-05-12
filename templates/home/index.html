@@ -4,9 +4,57 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>home</title>
   </head>
   <body>
-    <h1>{{request.user.email}}</h1>
+
+
+
+{% for  u in request.user.user_type %}
+  {% if u != 'Applicant' %}
+  <a href="{% url 'root:job-create' %}"><h1>create</h1></a>
+  
+  {% endif %}
+
+{% endfor %} 
+
+
+    {{request.user.email}} 
+    
+    
+     
+    {% if user.is_authenticated %}
+    
+    <a href="{% url 'accounts:logout' %}">logout</a>
+    {% else %}
+    <a href="{% url 'accounts:log_in' %}">login</a>
+
+    {% endif %}
+
+
+    
+
+    
+
+    
+    {% for job in jobs %}
+
+    <ul>
+      <li>
+        <a href="{% url 'root:job-details' job.slug %}">{{job.job_title}}</a>
+      </li>
+      <li>{{job.job_salary}}</li>
+      <li>{{job.job_description}}</li>
+      <li>{{job.job_start_date}}</li>
+      <li>{{job.job_end_date}}</li>
+      <li>{{job.job_type}}</li>
+      <li>{{job.job_working_hour}}</li>
+      <li>{{job.job_expreience}}</li>
+      <li>{{job.job_company}}</li>
+      <li>{{job.job_status}}</li>
+      <li>{{job.job_creations_date}}</li>
+      <li>{{job.slug}}</li>
+    </ul>
+    {% endfor %}
   </body>
 </html>

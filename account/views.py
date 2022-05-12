@@ -9,6 +9,7 @@ from account.form.proxyuserforms import (
     CompanyForm2,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LogoutView
 
 # Create your views here.
 
@@ -22,7 +23,7 @@ class LoginViewPage(LoginView):
 class SingUpPageView(CreateView):
     template_name = "accounts/registration/singup.html"
     form_class = RegistrationForm
-    success_url = reverse_lazy("account:log_in")
+    success_url = reverse_lazy("accounts:log_in")
 
     def form_valid(self, form):
         try:
@@ -34,6 +35,7 @@ class SingUpPageView(CreateView):
 
         messages.success(self.request, "account create sucess fully")
         return super().form_valid(form)
+    
 
 
 # class CopanyRegrastrationView(CreateView):
@@ -65,3 +67,8 @@ class RegrastrationViewCompany(LoginRequiredMixin, CreateView):
         user.save()
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+
+class LogoutPage(LogoutView):
+    next_page="accounts:log_in"
+    
