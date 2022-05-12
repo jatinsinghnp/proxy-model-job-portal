@@ -15,7 +15,7 @@ class Profiles(AbstractBaseUser):
     class ProfileType(models.TextChoices):
         Company = "Company", _("Company")
         Applicant = "Applicant", _("Applicant")
-
+    
     email = models.EmailField(_("email"), max_length=254, unique=True)
     phone_regex = RegexValidator(
         regex=r"^\+?1?\d{9,10}$",

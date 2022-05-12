@@ -1,5 +1,8 @@
 from django.db import models
 from account.models import CompanyProfile
+from django.utils.text import slugify
+from random import randint
+
 # Create your models here.
 
 
@@ -14,7 +17,6 @@ class Job(models.Model):
         ("FullTime", "FullTime"),
         ("PartTime", "PartTime"),
     ]
-    job_id = models.AutoField(primary_key=True)
     job_title = models.CharField(max_length=220)
     job_salary = models.FloatField()
     job_description = models.TextField()
@@ -26,5 +28,21 @@ class Job(models.Model):
     job_company = models.ForeignKey(CompanyProfile, on_delete=models.CASCADE)
     job_status = models.CharField(max_length=220, choices=STATUS_CHOICE)
     job_creations_date = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(blank=True, null=True,unique=True)
+
     def __str__(self) -> str:
         return self.job_title
+
+    def save(self, *args, **kwargs):
+        if Job.objects.filter(job_title=self.job_title).exists():
+            extra = str(randint(1, 10000))
+            self.slug = slugify(self.job_title) + "-" + extra
+        else:
+            self.slug = slugify(self.job_title)
+        super(Job, self).save(*args, **kwargs)
+
+
+# @receiver(pre_save, sender=Job)
+# def job_slug(sender, instance, *args, **kwargs):
+#     if not instance.job_slug:
+#         instance.job_slug = slugify(instance.job_title)
