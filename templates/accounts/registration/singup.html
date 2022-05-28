@@ -1,20 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sing up form</title>
-</head>
-<body>
+{% extends 'base.html' %} {% block content %}
+<div class="max-w-[500px] mx-auto">
+  <form action="" method="post">
+    {% csrf_token %}
 
-
-    <form action="" method="post"  enctype="multipart/form-data">
-
-
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="submit">
+    <form action="">
+      <div class="max-w-[200px] mt-7">
+        <span> {{form.email.label_tag}} </span> {{form.email}}
+        <span>{{form.date_of_birth.label_tag}}</span> {{form.date_of_birth}}
+        <span> {{form.first_name.label_tag}}</span> {{form.first_name}}
+        <span>{{form.last_name.label_tag}}</span> {{form.last_name}}
+        <span>{{form.phone_number.label_tag}}</span> {{form.phone_number}}
+        <span>{{form.password1.label_tag}}</span> {{form.password1}}
+        <span> {{form.password2.label_tag}}</span> {{form.password2}}
+      </div>
+      <button type="submit" class="bg-blue-500 p-1 rounded text-white hover:bg-blue-400 mt-2">
+        submit
+      </button>
     </form>
-</body>
-</html>
+  </form>
+</div>
+
+{% endblock content %}

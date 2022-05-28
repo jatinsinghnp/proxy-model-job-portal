@@ -15,7 +15,7 @@ class Profiles(AbstractBaseUser):
     class ProfileType(models.TextChoices):
         Company = "Company", _("Company")
         Applicant = "Applicant", _("Applicant")
-    
+
     email = models.EmailField(_("email"), max_length=254, unique=True)
     phone_regex = RegexValidator(
         regex=r"^\+?1?\d{9,10}$",
@@ -29,7 +29,7 @@ class Profiles(AbstractBaseUser):
     last_name = models.CharField(_("lname"), max_length=50)
     profile_image = models.ImageField(
         _("imagfields"),
-        upload_to=None,
+        upload_to="image/",
         height_field=None,
         width_field=None,
         max_length=None,

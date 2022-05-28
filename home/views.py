@@ -40,7 +40,7 @@ class JobDetailsView(LoginRequiredMixin, CreateView):
 
         user = get_object_or_404(Profiles, email=self.request.user.email)
         job = get_object_or_404(Job, slug=self.kwargs.get("job_slug"))
-
+        
         setField = form.save(commit=False)
         setField.apply_job = job
         setField.apply_applicant = user

@@ -10,3 +10,4 @@ class CheckUserMixins(LoginRequiredMixin, object):
                
 
         return super(CheckUserMixins, self).dispatch(request, *args, **kwargs)
+

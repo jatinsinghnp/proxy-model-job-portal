@@ -1,60 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>home</title>
-  </head>
-  <body>
+{% extends 'base.html' %} {% block content %}
 
-
-
-{% for  u in request.user.user_type %}
-  {% if u != 'Applicant' %}
-  <a href="{% url 'root:job-create' %}"><h1>create</h1></a>
-  
-  {% endif %}
-
-{% endfor %} 
-
-
-    {{request.user.email}} 
-    
-    
-     
-    {% if user.is_authenticated %}
-    
-    <a href="{% url 'accounts:logout' %}">logout</a>
-    {% else %}
-    <a href="{% url 'accounts:log_in' %}">login</a>
-
-    {% endif %}
-
-
-    
-
-    
-
-    
+<div>
+  <div>
     {% for job in jobs %}
 
-    <ul>
-      <li>
-        <a href="{% url 'root:job-details' job.slug %}">{{job.job_title}}</a>
-      </li>
-      <li>{{job.job_salary}}</li>
-      <li>{{job.job_description}}</li>
-      <li>{{job.job_start_date}}</li>
-      <li>{{job.job_end_date}}</li>
-      <li>{{job.job_type}}</li>
-      <li>{{job.job_working_hour}}</li>
-      <li>{{job.job_expreience}}</li>
-      <li>{{job.job_company}}</li>
-      <li>{{job.job_status}}</li>
-      <li>{{job.job_creations_date}}</li>
-      <li>{{job.slug}}</li>
-    </ul>
+    <div class="max-w-[800px] mx-auto flex space-y-4">
+      <div class="mr-7">
+        <img src="{{job.job_company.profile_image.url}}" alt="" />
+      </div>
+
+      <div class="space-y-3">
+        <h1 class="text-xl">
+          <a href="{% url 'root:job-details' job.slug %}">{{job.job_title}}</a>
+        </h1>
+        <div>
+          <p>Salary:- <span>{{job.job_salary}}</span></p>
+          <div class="p-1 bg-[#9BA3EB]">
+            {{job.job_start_date}} to {{job.job_end_date}}
+          </div>
+
+          <p>{{job.job_type}}</p>
+          <p>job working hours {{job.job_working_hour}}</p>
+          <p>Experience {{job.job_expreience}}</p>
+          <p>company name {{job.job_company.first_name}}</p>
+          <p>job status {{job.job_status}}</p>
+          <p>publish date {{job.job_creations_date}}</p>
+        </div>
+      </div>
+    </div>
     {% endfor %}
-  </body>
-</html>
+  </div>
+</div>
+
+{% endblock content %}

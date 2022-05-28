@@ -1,0 +1,30 @@
+<div class="bg-[#5C7AEA] text-white flex justify-between items-center p-3">
+  <div>
+    <h1><a href="{% url 'root:home' %}">Home</a></h1>
+  </div>
+  <div>
+    <ul class="flex space-x-7">
+      <li>
+        {% for u in request.user.user_type %} {% if u != 'Applicant' %}
+        <a href="{% url 'root:job-create' %}"><h1>create</h1></a>
+
+        {% endif %} {% endfor %}
+      </li>
+      <li><a href="">servivces</a></li>
+      
+      <li>
+        {% if user.is_authenticated %}
+
+        <a href="{% url 'accounts:logout' %}">logout</a>
+        {% else %}
+        <a href="{% url 'accounts:log_in' %}">login</a>
+
+        {% endif %}
+      </li>
+      <li class="text-white">
+        <a href=""><i class="fa-solid fa-bell text-white"></i></a>
+        <span class="text-red-500 absolute top-0 right-0">(0)</span>
+      </li>
+    </ul>
+  </div>
+</div>

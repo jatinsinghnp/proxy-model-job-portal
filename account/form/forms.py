@@ -1,8 +1,8 @@
 from django import forms
+
 from account.models import Profiles
 from django.core.exceptions import ValidationError
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
-
+from django.contrib.auth.forms import ReadOnlyPasswordHashField, AuthenticationForm
 
 
 class UserCreationForm(forms.ModelForm):
@@ -20,6 +20,7 @@ class UserCreationForm(forms.ModelForm):
             "first_name",
             "last_name",
         )
+       
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -43,3 +44,14 @@ class UserChangeForm(forms.ModelForm):
     class Meta:
         model = Profiles
         fields = ("email", "password", "date_of_birth", "is_active", "is_admin")
+
+
+class LogInForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["username"].widget = forms.widgets.TextInput(
+            attrs={"class": "outline-none p-2", "placeholder": "email"}
+        )
+        self.fields["password"].widget = forms.widgets.PasswordInput(
+            attrs={"class": "outline-none p-2", "placeholder": "password"}
+        )

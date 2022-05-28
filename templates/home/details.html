@@ -1,16 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    {{job.job_title}}
-    <form action="" method="post" enctype="multipart/form-data">
-      {{form.as_p}} {% csrf_token %}
-      <input type="submit" value="submit" />
-    </form>
-  </body>
-</html>
+{% extends 'base.html' %} {% block content %}
+<div class="max-w-[700px] mx-auto">
+  <h1 class="font-bold text-red-400 text-2xl">{{job.job_title}}</h1>
+
+  <p>{{job.job_description}}</p>
+
+  {% for u in request.user.user_type %} {% if u != 'Company' %}
+  <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p class="mt-4">
+      <label for=""> {{form.apply_cv.label_tag}} </label>
+      {{form.apply_cv}}
+    </p>
+    <button
+      type="submit"
+      class="p-1 rounded bg-blue-500 text-white hover:bg-blue-300 mt-4"
+    >
+      Apply
+    </button>
+    {% endif %} {% endfor %}
+  </form>
+</div>
+
+{% endblock content %}

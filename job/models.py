@@ -18,7 +18,7 @@ class Job(models.Model):
         ("PartTime", "PartTime"),
     ]
     job_title = models.CharField(max_length=220)
-    job_salary = models.FloatField()
+    job_salary = models.CharField(max_length=220)
     job_description = models.TextField()
     job_start_date = models.DateField()
     job_end_date = models.DateField()
@@ -41,8 +41,3 @@ class Job(models.Model):
             self.slug = slugify(self.job_title)
         super(Job, self).save(*args, **kwargs)
 
-
-# @receiver(pre_save, sender=Job)
-# def job_slug(sender, instance, *args, **kwargs):
-#     if not instance.job_slug:
-#         instance.job_slug = slugify(instance.job_title)

@@ -7,16 +7,19 @@ from account.form.proxyuserforms import (
     # CompanyRegrastrationForm,
     RegistrationForm,
     CompanyForm2,
+    
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LogoutView
 
+from .form.forms import LogInForm
 # Create your views here.
 
 
 class LoginViewPage(LoginView):
     template_name = "accounts/registration/login.html"
     redirect_authenticated_user = True
+    form_class=LogInForm
     next_page = reverse_lazy("root:home")
 
 

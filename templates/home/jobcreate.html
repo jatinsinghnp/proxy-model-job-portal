@@ -1,16 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <form action="" method="post">
-        {% csrf_token %}
-      {{form.as_p}}
-      <input type="submit" value="submit" />
-    </form>
-  </body>
-</html>
+{% extends 'base.html' %} {% block content %}
+
+<div class="max-w-[600px] mx-auto">
+  <form action="" method="post">
+    {% csrf_token %}
+
+    <div class="max-w-[200px] mt-11">
+      <label for=""> {{form.job_title.label_tag}} </label>
+      <p>{{form.job_title}}</p>
+
+      <label for=""> {{form.job_salary.label_tag}} </label>
+      <p>{{form.job_salary}}</p>
+
+      <label for=""> {{form.job_description.label_tag}} </label>
+      <p>{{form.job_description}}</p>
+
+      <label for=""> {{form.job_start_date.label_tag}} </label>
+
+      <p>{{form.job_start_date}}</p>
+      <label for=""> {{form.job_end_date.label_tag}} </label>
+      <p>{{form.job_end_date}}</p>
+      <label for=""> {{form.job_type.label_tag}} </label>
+      <p>{{form.job_type}}</p>
+      <label for=""> {{form.job_working_hour.label_tag}} </label>
+      <p>{{form.job_working_hour}}</p>
+      <label for=""> {{form.job_expreience.label_tag}} </label>
+      <p>{{form.job_expreience}}</p>
+      <label for=""> {{form.job_company.label_tag}} </label>
+      <p>{{form.job_company}}</p>
+      <label for=""> {{form.job_status.label_tag}} </label>
+      <p>{{form.job_status}}</p>
+    </div>
+    <button
+      type="submit"
+      class="p-1 rounded bg-blue-500 text-white hover:bg-blue-300 mt-4"
+    >Create</button>
+  </form>
+</div>
+{% endblock content %}
